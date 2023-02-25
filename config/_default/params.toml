@@ -18,7 +18,7 @@ subtitle = "A collection of my thoughts and ramblings on Microsoft's PowerPlatfo
 [sidebar.avatar]
 enabled = true
 local = true
-src = "img/ProfileImage.jpg"
+src = "img/avatar.png"
 
 [article]
 math = false
