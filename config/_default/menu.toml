@@ -16,17 +16,9 @@ url = "https://github.com/armanaxf"
 icon = "brand-github"
 
 [[social]]
-identifier = "twitter"
-name = "Twitter"
-url = "https://twitter.com"
-
-[social.params]
-icon = "brand-twitter"
-
-[[social]]
 identifier = "LinkedIn"
 name = "LinkedIn"
-url = "https://linkedin.com"
+url = "https://www.linkedin.com/in/josh-giles-41248885/"
 
 [social.params]
-icon = "brand-twitter"
+icon = "brand-linkedin"
