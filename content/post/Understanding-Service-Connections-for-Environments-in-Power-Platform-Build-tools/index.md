@@ -3,7 +3,7 @@ title: Understanding Service Connections for Environments in Power Platform Buil
 description: Understand how Service connections can be used in Power Platform Build tools for DevOps
 slug: Understanding-Service-Connections-for-Environments-in-Power-Platform-Build-tools
 date: 2023-02-28 00:00:00+0000
-image: cover.jpg
+image: software.jpg
 categories:
     - Azure DevOps
     - Power Platform
@@ -25,10 +25,10 @@ I won't cover how to setup a Service Principle, as this has been covered plenty 
 
 Adding a service connection to Azure DevOps is a straightforward procedure:
 
-Step 1: Within your Azure DevOps Project, go to "Project Settings"
-Step 2: Select "Service Connections"
-Step 3: Search for Power Platform in the Service connections list and click "Next"
-Step 4: Select "Application Id and Client Secret" and then fill in the rest of the options:
+Step 1: Within your Azure DevOps Project, go to "Project Settings"  
+Step 2: Select "Service Connections"  
+Step 3: Search for Power Platform in the Service connections list and click "Next"  
+Step 4: Select "Application Id and Client Secret" and then fill in the rest of the options:  
 
 - Server URL - This is the Power Platform Environment you will have added your App registration to when setting up the App Registration for Power Platform. You can get the URL by navigating to your environment within Power Platform, clicking the settings cog at the top right, and then clicking "session details".
 - Tenant Id: Tenant ID of your App Registration
@@ -89,7 +89,7 @@ steps:
 
 This pipeline is essentially doing what was mentioned above, but notice that the Environment isn't specified in these tasks, just the Service Connection. This is a nice feature of the "Create Environment" task, which sets the "BuildTools.EnvironmentUrl" as an output so that the import task can be run against the newly created Environment. Neat!
 
-How would this work for existing environments? Up until recently I was led to believe I would need a different service connection for each Envrionment I want to run tasks against. This is not teh case however, as provided the service connection has access, you can just target the Environment as part of the pipeline settings, see this example here:
+How would this work for existing environments? Up until recently I was led to believe I would need a different service connection for each Envrionment I want to run tasks against. This is not the case however, as provided the service connection has access, you can just target the Environment as part of the pipeline settings, see this example here:
 
 ~~~YAML
 - task: PowerPlatformExportSolution@2
