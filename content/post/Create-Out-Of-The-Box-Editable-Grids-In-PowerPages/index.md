@@ -18,7 +18,7 @@ tags:
 
 Power Pages is a helpful tool that makes it easy to create websites using low-code development. It also allows for rich integration with other Power Platform solutions.
 
-Recently, I had a requirement to use editable grids within Power Pages for list data. I managed to find some documentation on using code components for Power Pages here:
+Recently, I had a requirement to use editable grids within Power Pages for list data. I managed to find some documentation on using code components for Power Pages here: [https://learn.microsoft.com/en-us/power-pages/configure/tutorial-pcf-code](https://learn.microsoft.com/en-us/power-pages/configure/tutorial-pcf-code)
 
 Reading this, I found it confusing to understand as I felt it lacked clarity on whether you could in fact use editable grids.
 
