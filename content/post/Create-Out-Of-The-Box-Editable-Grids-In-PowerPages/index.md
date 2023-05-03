@@ -14,7 +14,7 @@ tags:
     - Power Pages
 ---
 
-# Introduction 
+## Introduction 
 
 Power Pages is a helpful tool that makes it easy to create websites using low-code development. It also allows for rich integration with other Power Platform solutions.
 
@@ -24,7 +24,7 @@ Reading this, I found it confusing to understand as I felt it lacked clarity on 
 
 To help streamline the process and save you time, I have put together a quick guide on how to use an editable grid in your Power Pages lists.
 
-## Step 1: Add the Editable Grid component to your desired table.
+### Step 1: Add the Editable Grid component to your desired table.
 
 I am using the Accounts table with a solution called "Test solution" for this demonstration.
 
@@ -44,7 +44,7 @@ I am using the Accounts table with a solution called "Test solution" for this de
 8. Click Save, and then click Publish
 ![Save and Publish](SavePublish.png)
 
-## Step 2: Add the component to Portal Management
+### Step 2: Add the component to Portal Management
 
 Now we have our editable grid added to our table, we need to configure Power Pages to use it. The first step is to add a new List so it can then be selected when adding it to our page.
 
@@ -60,7 +60,7 @@ Now we have our editable grid added to our table, we need to configure Power Pag
 6. Make sure that Use a configured code component is set to yes. You can change other properties here as needed, and then click Save and Close
 ![Set Code component to Yes](CodeComponentYes.png)
 
-## Step 3: Add the editable grid to your page
+### Step 3: Add the editable grid to your page
 
 The final step is to add the list to our page and test it out.
 
