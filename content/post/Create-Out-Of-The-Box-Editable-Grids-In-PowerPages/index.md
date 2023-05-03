@@ -14,7 +14,7 @@ tags:
     - Power Pages
 ---
 
-## Introduction 
+## Introduction
 
 Power Pages is a helpful tool that makes it easy to create websites using low-code development. It also allows for rich integration with other Power Platform solutions.
 
@@ -24,7 +24,7 @@ Reading this, I found it confusing to understand as I felt it lacked clarity on 
 
 To help streamline the process and save you time, I have put together a quick guide on how to use an editable grid in your Power Pages lists.
 
-### Add the Editable Grid component to your desired table.
+### Add the Editable Grid component to your desired table
 
 I am using the Accounts table with a solution called "Test solution" for this demonstration.
 
