@@ -13,7 +13,6 @@ tags:
   - Components
   - Design
   - Canvas Apps
-published: true
 ---
 
 With [Fluent UI v9](https://react.fluentui.dev/?path=/docs/concepts-introduction--page) slowly rolling out across Power Platform and beyond, I recently noticed that model-driven Apps now make use of the Fluentui v9 dialog, for example when trying to discard a new record: 
