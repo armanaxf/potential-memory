@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Power Pages on Josh Giles</title><link>https://joshlgiles.com/tags/power-pages/</link><description>Recent content in Power Pages on Josh Giles</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 03 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://joshlgiles.com/tags/power-pages/index.xml" rel="self" type="application/rss+xml"/><item><title>Create editable grids in Power Pages without using code</title><link>https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/</link><pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate><guid>https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/</guid><description>&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/Software.jpg" alt="Featured image of post Create editable grids in Power Pages without using code" />&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Power Pages is a helpful tool that makes it easy to create websites using low-code development. It also allows for rich integration with other Power Platform solutions.&lt;/p>
+&lt;p>Recently, I had a requirement to use editable grids within Power Pages for list data. I managed to find some documentation on using code components for Power Pages here: &lt;a class="link" href="https://learn.microsoft.com/en-us/power-pages/configure/tutorial-pcf-code" target="_blank" rel="noopener"
+>https://learn.microsoft.com/en-us/power-pages/configure/tutorial-pcf-code&lt;/a>&lt;/p>
+&lt;p>Reading this, I found it confusing to understand as I felt it lacked clarity on whether you could in fact use editable grids.&lt;/p>
+&lt;p>To help streamline the process and save you time, I have put together a quick guide on how to use an editable grid in your Power Pages lists.&lt;/p>
+&lt;h2 id="add-the-editable-grid-component-to-your-desired-table">Add the Editable Grid component to your desired table&lt;/h2>
+&lt;p>I am using the Accounts table with a solution called &amp;ldquo;Test solution&amp;rdquo; for this demonstration.&lt;/p>
+&lt;ol>
+&lt;li>Within your solution, navigate to Tables and then the ellipses and click &amp;ldquo;Switch to Classic&amp;rdquo;.
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NavigateToClassic.png"
+width="1309"
+height="572"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NavigateToClassic_hu1537ccfc154944d9a383562401d4955a_32585_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NavigateToClassic_hu1537ccfc154944d9a383562401d4955a_32585_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Navigate to Classic Solutions"
+class="gallery-image"
+data-flex-grow="228"
+data-flex-basis="549px"
+>&lt;/li>
+&lt;li>Double click the Account Table (also called Entity).
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/DoubleClickAccount.png"
+width="1496"
+height="889"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/DoubleClickAccount_hubd371c81528a2a80c1d1084f798de9ea_92948_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/DoubleClickAccount_hubd371c81528a2a80c1d1084f798de9ea_92948_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Double Click Account"
+class="gallery-image"
+data-flex-grow="168"
+data-flex-basis="403px"
+>&lt;/li>
+&lt;li>Click the Controls tab and then Add Control&amp;hellip;
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/ClickControl.png"
+width="1546"
+height="947"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/ClickControl_hu0dca1054fed9d67ba2ff13a745888d33_123744_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/ClickControl_hu0dca1054fed9d67ba2ff13a745888d33_123744_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Click Control Tab"
+class="gallery-image"
+data-flex-grow="163"
+data-flex-basis="391px"
+>
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddControl.png"
+width="1842"
+height="901"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddControl_hu59a4223b167c9552b1e8f1bc0012108e_84405_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddControl_hu59a4223b167c9552b1e8f1bc0012108e_84405_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Add Control"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="490px"
+>&lt;/li>
+&lt;li>In the Add control menu, search for and select the PowerApps grid control, then click Add.
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/ClickAdd.png"
+width="515"
+height="471"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/ClickAdd_hu6f14a01637a75e92dde284a5087de878_16049_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/ClickAdd_hu6f14a01637a75e92dde284a5087de878_16049_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Click Add"
+class="gallery-image"
+data-flex-grow="109"
+data-flex-basis="262px"
+>&lt;/li>
+&lt;li>Ensure that the Power Apps grid control is enabled for Web and Phone/Tablet if required.&lt;/li>
+&lt;li>Select the control to bring up the properties.&lt;/li>
+&lt;li>Set the value of Enable editing to &amp;ldquo;Yes&amp;rdquo;. You can enable other properties too if required, and I recommend you check out the documentation to find out which each property does.
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/EnableEditing.png"
+width="1828"
+height="867"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/EnableEditing_hu79801a84ac7854df43a3b861f186e7b8_90850_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/EnableEditing_hu79801a84ac7854df43a3b861f186e7b8_90850_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Enable editing"
+class="gallery-image"
+data-flex-grow="210"
+data-flex-basis="506px"
+>&lt;/li>
+&lt;li>Click Save, and then click Publish
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/SavePublish.png"
+width="1828"
+height="867"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/SavePublish_huc0d6e8170324ea9415e1765e0c5b10d3_90735_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/SavePublish_huc0d6e8170324ea9415e1765e0c5b10d3_90735_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Save and Publish"
+class="gallery-image"
+data-flex-grow="210"
+data-flex-basis="506px"
+>&lt;/li>
+&lt;/ol>
+&lt;h2 id="add-the-component-to-portal-management">Add the component to Portal Management&lt;/h2>
+&lt;p>Now we have our editable grid added to our table, we need to configure Power Pages to use it. The first step is to add a new List so it can then be selected when adding it to our page.&lt;/p>
+&lt;ol>
+&lt;li>Navigate to make.powerpages.microsoft.com&lt;/li>
+&lt;li>Select the elipses against your site and select Portal management
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/PortalManagement2-min.png"
+width="1837"
+height="886"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/PortalManagement2-min_hueda281a952a99c9df761f8dacd473054_131159_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/PortalManagement2-min_hueda281a952a99c9df761f8dacd473054_131159_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Portal Edit"
+class="gallery-image"
+data-flex-grow="207"
+data-flex-basis="497px"
+>&lt;/li>
+&lt;li>Under Content, go to Lists, click New
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NewList.png"
+width="1827"
+height="895"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NewList_hu2dbb3243884683df0e253ef8bc11b3a6_86039_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NewList_hu2dbb3243884683df0e253ef8bc11b3a6_86039_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Add new list"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="489px"
+>&lt;/li>
+&lt;li>Give your List a Name, select the Table, and the website
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NameTableWebsite.png"
+width="1844"
+height="920"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NameTableWebsite_hu7b3afd26e933cb32cafab4423a3ae13d_75199_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/NameTableWebsite_hu7b3afd26e933cb32cafab4423a3ae13d_75199_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="List name and Table selection"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="481px"
+>&lt;/li>
+&lt;li>Add your views
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddViews.png"
+width="1827"
+height="937"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddViews_hua252c30f51692c73c1676e79a62b74d5_69213_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddViews_hua252c30f51692c73c1676e79a62b74d5_69213_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Add views"
+class="gallery-image"
+data-flex-grow="194"
+data-flex-basis="467px"
+>&lt;/li>
+&lt;li>Make sure that Use a configured code component is set to yes. You can change other properties here as needed, and then click Save and Close
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/CodeComponentYes.png"
+width="1802"
+height="908"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/CodeComponentYes_hudc9a76f4751bac938aeb24c7b1e72da6_68659_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/CodeComponentYes_hudc9a76f4751bac938aeb24c7b1e72da6_68659_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Set Code component to Yes"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="476px"
+>&lt;/li>
+&lt;/ol>
+&lt;h2 id="add-the-editable-grid-to-your-page">Add the editable grid to your page&lt;/h2>
+&lt;p>The final step is to add the list to our page and test it out.&lt;/p>
+&lt;ol>
+&lt;li>navigate back to your Power Page site and edit it
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/EditPage.png"
+width="1834"
+height="858"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/EditPage_hu9c287c03f313ba0d7b529c8c4bbf7a47_462443_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/EditPage_hu9c287c03f313ba0d7b529c8c4bbf7a47_462443_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Edit Page"
+class="gallery-image"
+data-flex-grow="213"
+data-flex-basis="513px"
+>&lt;/li>
+&lt;li>go to the page where you wish to add the editable grid. In my example I have a test page called Temp
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/GoToTemp.png"
+width="1821"
+height="893"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/GoToTemp_hu248de8d61ecf720d9a8d8fe173eae28e_88261_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/GoToTemp_hu248de8d61ecf720d9a8d8fe173eae28e_88261_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Navigate to page"
+class="gallery-image"
+data-flex-grow="203"
+data-flex-basis="489px"
+>&lt;/li>
+&lt;li>Add a List to the page under the Choose a component to add to this section
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddList.png"
+width="1821"
+height="893"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddList_hu186975755e21ed13d1f9e5ec28ebdbab_88764_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddList_hu186975755e21ed13d1f9e5ec28ebdbab_88764_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Add a List"
+class="gallery-image"
+data-flex-grow="203"
+data-flex-basis="489px"
+>&lt;/li>
+&lt;li>Select the existing list we added in the previous steps, in my case it&amp;rsquo;s the Test view with Grid
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddtestViewWithGrid.png"
+width="714"
+height="501"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddtestViewWithGrid_hu13d2a2ff88ab0c830d404a386bccd3a2_30466_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/AddtestViewWithGrid_hu13d2a2ff88ab0c830d404a386bccd3a2_30466_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Add list from menu"
+class="gallery-image"
+data-flex-grow="142"
+data-flex-basis="342px"
+>&lt;/li>
+&lt;li>Sync and preview your page, you should now see the editable grid displayed in the preview page.
+&lt;img src="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/SyncPreview.png"
+width="1843"
+height="907"
+srcset="https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/SyncPreview_hu7adb306060f996adc980a4619b84d06d_84703_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/create-out-of-the-box-editable-grids-in-powerpages/SyncPreview_hu7adb306060f996adc980a4619b84d06d_84703_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Sync and Save"
+class="gallery-image"
+data-flex-grow="203"
+data-flex-basis="487px"
+>&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>We should now be able to see our editable grid component in action:&lt;/p>
+&lt;div class="video-wrapper">
+&lt;video
+controls
+src="EditableGridRecording.mp4"
+autoplay
+>
+&lt;p>
+Your browser doesn't support HTML5 video. Here is a
+&lt;a href="EditableGridRecording.mp4">link to the video&lt;/a> instead.
+&lt;/p>
+&lt;/video>
+&lt;/div>
+&lt;p>In this quick tutorial I have demonstrated how you can quickly set up a List in Power Pages to use the editable grid component.&lt;/p>
+&lt;p>I hope this has been helpful and saves you some time if you ever need to add an editable grid to your Power Pages site. If you have any feedback, feel free to leave a comment below.&lt;/p></description></item></channel></rss>

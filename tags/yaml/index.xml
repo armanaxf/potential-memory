@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YAML on Josh Giles</title><link>https://joshlgiles.com/tags/yaml/</link><description>Recent content in YAML on Josh Giles</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://joshlgiles.com/tags/yaml/index.xml" rel="self" type="application/rss+xml"/><item><title>Update Org settings in Power Platform build tools</title><link>https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/</link><pubDate>Wed, 30 Aug 2023 00:00:00 +0000</pubDate><guid>https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/</guid><description>&lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Software.jpg" alt="Featured image of post Update Org settings in Power Platform build tools" />&lt;p>Recently whilst looking through the &lt;a class="link" href="https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools" target="_blank" rel="noopener"
+>Power Platform build tools&lt;/a>, I stumbled upon a task which I didn&amp;rsquo;t recognise called &amp;ldquo;&lt;strong>Update Org settings&lt;/strong>&amp;rdquo;: &lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Update-Org-settings.png"
+width="299"
+height="89"
+srcset="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Update-Org-settings_hud6b13bf165ba84812b4d7cb409b79285_5631_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Update-Org-settings_hud6b13bf165ba84812b4d7cb409b79285_5631_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Build tools task for update org settings"
+class="gallery-image"
+data-flex-grow="335"
+data-flex-basis="806px"
+>.&lt;/p>
+&lt;p>This appears to be an undocumented task, but on closer inspection, it looks to be a wrapper around the update-settings command found in the &lt;a class="link" href="https://learn.microsoft.com/en-us/power-platform/developer/cli/reference/org#pac-org-update-settings" target="_blank" rel="noopener"
+>PAC CLI tools&lt;/a>. Unfortunately this also seems quite &amp;ldquo;light&amp;rdquo; on information, so I decided to investigate further.&lt;/p>
+&lt;p>Selecting my development environment and running pac org list-settings, I get a list of environment settings, neat! &lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/list-settings.png"
+width="663"
+height="713"
+srcset="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/list-settings_hu678f4501b8dc93898a67142ce7713182_65288_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/list-settings_hu678f4501b8dc93898a67142ce7713182_65288_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="list of environment settings"
+class="gallery-image"
+data-flex-grow="92"
+data-flex-basis="223px"
+>&lt;/p>
+&lt;p>I can now pick out any of these settings and use them in the update-settings command. Something to note is that the parameter expects &lt;strong>true&lt;/strong> or &lt;strong>false&lt;/strong> values rather than Yes or No which the list-settings results suggest.&lt;/p>
+&lt;p>In my test, I wanted to enable code components for Canvas Apps in my environment, we can see the setting under Environment features: &lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Code-components-for-canvas-apps.png"
+width="785"
+height="182"
+srcset="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Code-components-for-canvas-apps_hu708a3366b19a741f0c2358ccd9ade006_27810_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Code-components-for-canvas-apps_hu708a3366b19a741f0c2358ccd9ade006_27810_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="code components for canvas apps setting"
+class="gallery-image"
+data-flex-grow="431"
+data-flex-basis="1035px"
+>&lt;/p>
+&lt;p>The setting I found in the list-settngs parameter which matched most closely was: &lt;strong>iscustomcontrolsincanvasappsenabled&lt;/strong>&lt;/p>
+&lt;p>Lets give this a go and see if it works:&lt;/p>
+&lt;p>&lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/paccliupdateorgsettings.png"
+width="626"
+height="38"
+srcset="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/paccliupdateorgsettings_hu417270f1cc98ddc05cd74328da6cc961_5297_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/paccliupdateorgsettings_hu417270f1cc98ddc05cd74328da6cc961_5297_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="pac cli results"
+class="gallery-image"
+data-flex-grow="1647"
+data-flex-basis="3953px"
+>&lt;/p>
+&lt;p>This looks promising, lets check the setting in Environment Admin&amp;hellip; &lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Canvas-components-on.png"
+width="827"
+height="176"
+srcset="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Canvas-components-on_hu0cb9c4f11a3f4b94aaf846cfb7c96540_27560_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/Canvas-components-on_hu0cb9c4f11a3f4b94aaf846cfb7c96540_27560_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Canvas App code component setting turned on"
+class="gallery-image"
+data-flex-grow="469"
+data-flex-basis="1127px"
+>&lt;/p>
+&lt;p>Nice!&lt;/p>
+&lt;p>So now that we have this working with the PAC CLI commands, lets see how this works within Power Platform Build tools tasks for Azure Devops pipelines. Using the same example as we used with PAC CLI to enable code components in Canvas Apps, we can add the &lt;strong>Update Org Settings&lt;/strong> build tools task in our pipeline to achieve the same results.&lt;/p>
+&lt;p>When selecting the update org settings build tools task, it will ask for 3 settings: &lt;strong>Service Connection&lt;/strong>, &lt;strong>Setting Name&lt;/strong>, and &lt;strong>Setting value&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/update-org-settings-config.png"
+width="359"
+height="492"
+srcset="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/update-org-settings-config_hu1967288254828f5f36b3d3433be0f211_18608_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/update-org-settings-config_hu1967288254828f5f36b3d3433be0f211_18608_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Update org settings configuration"
+class="gallery-image"
+data-flex-grow="72"
+data-flex-basis="175px"
+>&lt;/p>
+&lt;p>For Service connection, use whichever method you have configured to authenticate to your Power Platform Environment. If not using them already, I would reccomend using a service principle for your pipelines, however. I have a blog post for setitngs these up which you can read &lt;a class="link" href="https://joshlgiles.com/p/understanding-service-connections-for-environments-in-power-platform-build-tools/" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/p>
+&lt;p>The Setting name will be the same settings which we discovered in the PAC CLI List-Settings task, so in our example, we will set it to &lt;strong>iscustomcontrolsincanvasappsenabled&lt;/strong> and the Setting value will need to be set to either true or false. In my example I set it to true. Click add to add the YAML code to the pipeline, and you should see something similar to this:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-YAML" data-lang="YAML">&lt;span class="line">&lt;span class="cl">- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformUpdateOrgSettings@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">authenticationType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;PowerPlatformSPN&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PowerPlatformSPN&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;MyServiceConnection&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;iscustomcontrolsincanvasappsenabled&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Value&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;true&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now, if we add this task to part of an environment creation process, we can start to automate our preconfiguration of Environments to further enhance our Environment lifecycle processes. Using the above YAML in our pipeline, we can add this to a Create Environment task to make this possible:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-YAML" data-lang="YAML">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">trigger&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="l">main&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">pool&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">vmImage&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformToolInstaller@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">DefaultVersion&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformCreateEnvironment@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">authenticationType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;PowerPlatformSPN&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PowerPlatformSPN&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;MyServiceConnection&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">DisplayName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;TestEnvironment&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnvironmentSku&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;Sandbox&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">LocationName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;unitedkingdom&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">LanguageName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;English&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">CurrencyName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;GBP&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">DomainName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;TestEnvironment&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformUpdateOrgSettings@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">authenticationType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;PowerPlatformSPN&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PowerPlatformSPN&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;MyServiceConnection&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;iscustomcontrolsincanvasappsenabled&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Value&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;true&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>When we run this pipeline, a new Environment called TestEnvironment will be created, and it will have the Custom code components for Canvas Apps enabled. Runinng the pipeline, we can see it has run sucessfully:&lt;/p>
+&lt;p>&lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/pipeline-run-sucess.png"
+width="314"
+height="240"
+srcset="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/pipeline-run-sucess_hu50a86e03f148e1431bace5774ae0ef5e_11523_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/pipeline-run-sucess_hu50a86e03f148e1431bace5774ae0ef5e_11523_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Pipeline successful run"
+class="gallery-image"
+data-flex-grow="130"
+data-flex-basis="314px"
+>&lt;/p>
+&lt;p>Now when we check the created environment, the setting should be enabled:&lt;/p>
+&lt;p>&lt;img src="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/settingenabled.png"
+width="799"
+height="180"
+srcset="https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/settingenabled_hu17b24c8a7f838d37d7a46bd327d7f3c4_27557_480x0_resize_box_3.png 480w, https://joshlgiles.com/p/update-org-settings-in-power-platform-build-tools/settingenabled_hu17b24c8a7f838d37d7a46bd327d7f3c4_27557_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Sucess"
+class="gallery-image"
+data-flex-grow="443"
+data-flex-basis="1065px"
+>&lt;/p>
+&lt;p>Hopefully this has been helpful, and this should come in handy when spinning up new developer environments and allowing for these environments to be more disposable as part of a healthy ALM process and environment strategy.&lt;/p></description></item><item><title>Use the Set Solution version task Power Platform Build tools task in Azure Devops</title><link>https://joshlgiles.com/p/use-the-set-solution-version-task-power-platform-build-tools-task-in-azure-devops/</link><pubDate>Fri, 10 Mar 2023 00:00:00 +0000</pubDate><guid>https://joshlgiles.com/p/use-the-set-solution-version-task-power-platform-build-tools-task-in-azure-devops/</guid><description>&lt;img src="https://joshlgiles.com/p/use-the-set-solution-version-task-power-platform-build-tools-task-in-azure-devops/Software.jpg" alt="Featured image of post Use the Set Solution version task Power Platform Build tools task in Azure Devops" />&lt;p>Power Platform Build tools offer a great way to manage Continuous Integration and Continuous Deployment(CI/CD) within Azure DevOps. Storing Solutions as code and working collaboratively using these tools is just some of the many benefits offered by making use of these tools and forms a key part of the overall Application Lifecycle Management(ALM). See &lt;a class="link" href="https://learn.microsoft.com/en-us/power-platform/alm/%28https://learn.microsoft.com/en-us/power-platform/alm/" target="_blank" rel="noopener"
+>https://learn.microsoft.com/en-us/power-platform/alm/(https://learn.microsoft.com/en-us/power-platform/alm/&lt;/a> for a more in-depth overview of ALM for Power platform.&lt;/p>
+&lt;p>When exporting a solution from an Environment, it is good practice to set solution version to enable solutions to be tracked more easily and track what functionality is included in a release.&lt;/p>
+&lt;p>Up until recently, I had run into a bit of a roadblock where I was unable to set a solution version when using a service connection which had a different default environment set compared to the environment I was wanting to target. After much head scratching, I actually found that although the build tools do not specify that you can set an Environment to target, you can in fact target an Environment if you specify the parameter and ignore the warning!&lt;/p>
+&lt;p>Here&amp;rsquo;s an example of the task:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Yaml" data-lang="Yaml">&lt;span class="line">&lt;span class="cl">- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformSetSolutionVersion@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">authenticationType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;PowerPlatformSPN&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PowerPlatformSPN&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;My Service Connection (Default)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Environment&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ parameters.Environment }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SolutionName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ variables.SolutionName}}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SolutionVersionNumber&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ variables.VersionNumber}}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>What we see above is the addition of the &amp;ldquo;Environment&amp;rdquo; Parameter which is not specified in documentation and when you add it to your task it will give the squiggly line of doom. To provide further context, I am specifying my Environment as a runtime parameter and my Solution Name as a variable. My version number is set by using a variable and specifying the Azure DevOps build number in the pipeline: $(Build.BuildNumber). My Environments have the Service connection (App registration) already added to them with relevant permissions, so that I can target them with no issues.&lt;/p>
+&lt;p>I&amp;rsquo;ve raised an issue on the Power Platform Build tools so hopefully this will be fixed soon to make it more obvious that you can in fact target different environments with this task. You can view the issue &lt;a class="link" href="https://github.com/microsoft/powerplatform-build-tools/issues/287" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>You can read more about Parameters &lt;a class="link" href="https://learn.microsoft.com/en-us/azure/devops/pipelines/process/runtime-parameters?view=azure-devops&amp;amp;tabs=script" target="_blank" rel="noopener"
+>here&lt;/a> and Variables &lt;a class="link" href="https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&amp;amp;tabs=yaml" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>To summarise, being able to set a the solution version of your exported solutions and targeting your environments is great as it&amp;rsquo;s yet another aspect of CI/CD that you can configure.&lt;/p></description></item><item><title>Understanding Service Connections for Environments in Power Platform Build tools</title><link>https://joshlgiles.com/p/understanding-service-connections-for-environments-in-power-platform-build-tools/</link><pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate><guid>https://joshlgiles.com/p/understanding-service-connections-for-environments-in-power-platform-build-tools/</guid><description>&lt;img src="https://joshlgiles.com/p/understanding-service-connections-for-environments-in-power-platform-build-tools/Software.jpg" alt="Featured image of post Understanding Service Connections for Environments in Power Platform Build tools" />&lt;p>If you are new to Power Platform Build tools and how it can facilitate Continuous Integration/Continuous Development (CI/CD), it can be very daunting to understand where to start and how to get up and running.&lt;/p>
+&lt;p>Microsoft&amp;rsquo;s Documentation is great for gaining an understanding of how to get up and runnign using Azure DevOps, hower the documentation doesn&amp;rsquo;t seem to be the most up to date, as examples are still using classic pipelines (instead of YAML), and the documentation doesn&amp;rsquo;t appear to contain any information on some of the latest functionality that has been introduced recently (which is a shame as it&amp;rsquo;s great!)&lt;/p>
+&lt;p>In this post I would like to highlight the benefits of service connections in Azure Devops when working with PowerPlatform Build Tools and hopefully simplify the process of using service connections to target different environments when working with CI/CD.&lt;/p>
+&lt;p>I won&amp;rsquo;t cover how to setup a Service Principle, as this has been covered plenty already, and The documentation also goes over this in good detail, see &lt;a class="link" href="https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>Adding a service connection to Azure DevOps is a straightforward procedure:&lt;/p>
+&lt;p>Step 1: Within your Azure DevOps Project, go to &amp;ldquo;Project Settings&amp;rdquo;&lt;br>
+Step 2: Select &amp;ldquo;Service Connections&amp;rdquo;&lt;br>
+Step 3: Search for Power Platform in the Service connections list and click &amp;ldquo;Next&amp;rdquo;&lt;br>
+Step 4: Select &amp;ldquo;Application Id and Client Secret&amp;rdquo; and then fill in the rest of the options:&lt;/p>
+&lt;ul>
+&lt;li>Server URL - This is the Power Platform Environment you will have added your App registration to when setting up the App Registration for Power Platform. You can get the URL by navigating to your environment within Power Platform, clicking the settings cog at the top right, and then clicking &amp;ldquo;session details&amp;rdquo;.&lt;/li>
+&lt;li>Tenant Id: Tenant ID of your App Registration&lt;/li>
+&lt;li>Application Id: App ID (Client ID) of your App Registration&lt;/li>
+&lt;li>Client Secret of Application ID: Secret generated when you created the App Registration&lt;/li>
+&lt;li>Service Connection Name: Name of your connection. Name it something easy to remember and easy to reference.&lt;/li>
+&lt;li>Ensure &amp;ldquo;Grant access permission to all pipelines&amp;rdquo; is ticked
+Step 5: Click &amp;ldquo;Save&amp;rdquo;. This will create the Service connection which can now be used within your pipelines.&lt;/li>
+&lt;/ul>
+&lt;p>Now this is where the magic happens (and also where the docs aren&amp;rsquo;t very clear!), you can use this connection, and target any environment within your Power Platform Tenant, as long as you have added the app registration to them first. If you decide to automate Environmenet creation via the pipeline (and you should as it&amp;rsquo;s a big timesaver), it will actually automatically add the app registration to the created environment store the environment in a pipeline variable called BuildTools.EnvironmentUrl, which you can then use to automatr further tasks as part of an environment set-up and configuration. An exmaple of this could be to then import a solution so that it&amp;rsquo;s ready for developers.&lt;/p>
+&lt;p>An example of this pipeline could look like this:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-YAML" data-lang="YAML">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">trigger&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="l">none&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">pool&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">vmImage&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">windows-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformToolInstaller@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">DefaultVersion&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformPackSolution@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SolutionSourceFolder&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(Build.SourcesDirectory)\ExportedSolutions\$(SolutionName)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SolutionOutputFile&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(Build.ArtifactStagingDirectory)\$(SolutionName)_Unmanaged.zip&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SolutionType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;UnManaged&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">ProcessCanvasApps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PublishPipelineArtifact@1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">targetPath&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(Build.ArtifactStagingDirectory)\$(SolutionName)_Unmanaged.zip&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">artifact&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;Solution&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">publishLocation&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;pipeline&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformCreateEnvironment@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">authenticationType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;PowerPlatformSPN&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PowerPlatformSPN&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;MyServiceConnection&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">DisplayName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(SolutionName)-$(Build.BuildId)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">EnvironmentSku&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;Sandbox&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">LocationName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;unitedkingdom&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">LanguageName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;English&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">CurrencyName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;GBP&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">DomainName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(SolutionName)-$(Build.BuildId)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformImportSolution@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">authenticationType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;PowerPlatformSPN&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PowerPlatformSPN&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;MyServiceConenction&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SolutionInputFile&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(Build.ArtifactStagingDirectory)\$(SolutionName)_Unmanaged.zip&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">AsyncOperation&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">MaxAsyncWaitTime&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;60&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This pipeline is essentially doing what was mentioned above, but notice that the Environment isn&amp;rsquo;t specified in these tasks, just the Service Connection. This is a nice feature of the &amp;ldquo;Create Environment&amp;rdquo; task, which sets the &amp;ldquo;BuildTools.EnvironmentUrl&amp;rdquo; as an output so that the import task can be run against the newly created Environment. Neat!&lt;/p>
+&lt;p>How would this work for existing environments? Up until recently I was led to believe I would need a different service connection for each Envrionment I want to run tasks against. This is not the case however, as provided the service connection has access, you can just target the Environment as part of the pipeline settings, see this example here:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-YAML" data-lang="YAML">&lt;span class="line">&lt;span class="cl">- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PowerPlatformExportSolution@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">authenticationType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;PowerPlatformSPN&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PowerPlatformSPN&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;MyServiceConnection&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">Environment&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(EnvURL)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SolutionName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(SolutionName)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">SolutionOutputFile&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(Build.ArtifactStagingDirectory)\$(SolutionName).zip&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">AsyncOperation&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">MaxAsyncWaitTime&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;60&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Notice in the above export solution task how the Service Connection remains the same but an additional parameter names &amp;ldquo;Environment&amp;rdquo; is set with a pipeline variable which is defined on runtime to point to the Environemnt URL. This is a great way to quickly get set up and manage multiple environments, especially when managing them as part of an overall strategy where Environments are short lived for features/hotfixes as part of an overall branching strategy in Azure DevOps.&lt;/p>
+&lt;p>I hope this has been useful and provides some insight on how you can begin to automate tasks as part of a healthy ALM set-up within the PowerPlatform.&lt;/p></description></item></channel></rss>
